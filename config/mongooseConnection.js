@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
+const config = require('config');
+
+const dbgr = require('debug')('development:mongoose');
+// $env:DEBUG="development:*"
 
 mongoose
-    .connect('mongodb://127.0.0.1:27017/scatch')
+    .connect(`${config.get('MONGODB_URI')}/scatch`) //this works on the basis k env variable ki value kaya ha
     .then(function () {
-        console.log('MongoDB Connected Sucessfully');
+        dbgr('MongoDB Connected Sucessfully');
         // can also use debuggers
     })
     .catch((err) => {
